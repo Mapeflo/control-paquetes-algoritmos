@@ -44,6 +44,25 @@ public class ControlPaquetes {
             System.out.println("  No se encontraron paquetes con ese estado.");
         }
     }
+    /**
+     * Ordena el arreglo por código de seguimiento usando Bubble Sort.
+     * Complejidad: O(n²)
+     * Este ordenamiento es la precondición necesaria para la búsqueda binaria.
+     */
+    public static void ordenarPorCodigo(Paquete[] paquetes) {
+        int n = paquetes.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (paquetes[j].getCodigoSeguimiento()
+                        .compareToIgnoreCase(paquetes[j + 1].getCodigoSeguimiento()) > 0) {
+                    // Intercambio
+                    Paquete temp = paquetes[j];
+                    paquetes[j] = paquetes[j + 1];
+                    paquetes[j + 1] = temp;
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
 
         Paquete[] paquetes = {
@@ -86,5 +105,10 @@ public class ControlPaquetes {
         buscarTodosPorEstado(paquetes, "En tránsito");   // Varios resultados
         buscarTodosPorEstado(paquetes, "Entregado");     // Varios resultados
         buscarTodosPorEstado(paquetes, "Perdido");       // Ningún resultado
+
+        // ========== ORDENAMIENTO POR CÓDIGO ==========
+        System.out.println("\n>>> ORDENAMIENTO POR CÓDIGO DE SEGUIMIENTO");
+        ordenarPorCodigo(paquetes);
+        mostrarPaquetes(paquetes, "Arreglo ordenado por código");
     }
 }
