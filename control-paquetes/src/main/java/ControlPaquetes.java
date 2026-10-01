@@ -24,6 +24,26 @@ public class ControlPaquetes {
         }
         return -1; // No encontrado
     }
+    /**
+     * Busca y muestra todos los paquetes con un estado específico.
+     * Complejidad: O(n)
+     * Valida casos con 0, 1 o varios resultados.
+     */
+    public static void buscarTodosPorEstado(Paquete[] paquetes, String estado) {
+        boolean encontrado = false;
+        System.out.println("\n--- Paquetes con estado: \"" + estado + "\" ---");
+
+        for (int i = 0; i < paquetes.length; i++) {
+            if (paquetes[i].getEstado().equalsIgnoreCase(estado)) {
+                System.out.println("  Índice " + i + ": " + paquetes[i]);
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("  No se encontraron paquetes con ese estado.");
+        }
+    }
     public static void main(String[] args) {
 
         Paquete[] paquetes = {
@@ -60,5 +80,11 @@ public class ControlPaquetes {
         } else {
             System.out.println("Búsqueda NO EXITOSA: \"" + codigoFallo + "\" no existe.");
         }
+        // ========== BÚSQUEDA POR ESTADO ==========
+        System.out.println("\n>>> BÚSQUEDA DE TODOS LOS PAQUETES POR ESTADO");
+
+        buscarTodosPorEstado(paquetes, "En tránsito");   // Varios resultados
+        buscarTodosPorEstado(paquetes, "Entregado");     // Varios resultados
+        buscarTodosPorEstado(paquetes, "Perdido");       // Ningún resultado
     }
 }
