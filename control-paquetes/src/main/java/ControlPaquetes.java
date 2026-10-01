@@ -162,5 +162,22 @@ public class ControlPaquetes {
         } else {
             System.out.println("Búsqueda binaria NO EXITOSA: \"" + codigoBinFallo + "\" no existe.");
         }
+        // ========== COMPARACIÓN DE BÚSQUEDAS Y COMPLEJIDAD ==========
+        System.out.println("\n>>> COMPARACIÓN DE BÚSQUEDAS EXITOSAS Y NO EXITOSAS");
+        System.out.println("""
+        • Búsqueda Lineal:
+        - Exitosa: puede encontrar el elemento en cualquier posición (mejor caso O(1), peor caso O(n)).
+        - No exitosa: siempre recorre todo el arreglo → O(n).
+
+        • Búsqueda Binaria (arreglo ordenado):
+        - Tanto exitosa como no exitosa: O(log n).
+        - Mucho más eficiente en arreglos grandes porque descarta la mitad de los elementos en cada paso.
+        """);
+
+        System.out.println("\n>>> COMPLEJIDAD TEMPORAL DE LOS ALGORITMOS");
+        System.out.println("• Búsqueda lineal por código:          O(n)");
+        System.out.println("• Búsqueda de todos por estado:        O(n)");
+        System.out.println("• Ordenamiento (Bubble Sort):          O(n²)");
+        System.out.println("• Búsqueda binaria:                    O(log n)");
     }
 }
