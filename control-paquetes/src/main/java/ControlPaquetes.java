@@ -7,6 +7,23 @@ public class ControlPaquetes {
         }
     }
 
+    /**
+     * Búsqueda lineal por código de seguimiento.
+     * Complejidad: O(n)
+     * No requiere que el arreglo esté ordenado.
+     */
+    public static int busquedaLinealPorCodigo(Paquete[] paquetes, String codigo) {
+        if (paquetes == null || paquetes.length == 0) {
+            return -1;
+        }
+
+        for (int i = 0; i < paquetes.length; i++) {
+            if (paquetes[i].getCodigoSeguimiento().equalsIgnoreCase(codigo)) {
+                return i; // Encontrado
+            }
+        }
+        return -1; // No encontrado
+    }
     public static void main(String[] args) {
 
         Paquete[] paquetes = {
@@ -21,5 +38,27 @@ public class ControlPaquetes {
         };
 
         mostrarPaquetes(paquetes, "Arreglo original de paquetes");
+
+        // ========== PRUEBAS DE BÚSQUEDA LINEAL ==========
+        System.out.println("\n>>> BÚSQUEDA LINEAL POR CÓDIGO");
+
+        // Caso exitoso
+        String codigoExito = "TRK1003";
+        int posicion = busquedaLinealPorCodigo(paquetes, codigoExito);
+        if (posicion != -1) {
+            System.out.println("Búsqueda EXITOSA: \"" + codigoExito + "\" encontrado en el índice " + posicion);
+            System.out.println("  → " + paquetes[posicion]);
+        } else {
+            System.out.println("Búsqueda NO EXITOSA: \"" + codigoExito + "\" no existe.");
+        }
+
+        // Caso no exitoso
+        String codigoFallo = "TRK9999";
+        posicion = busquedaLinealPorCodigo(paquetes, codigoFallo);
+        if (posicion != -1) {
+            System.out.println("Búsqueda EXITOSA: \"" + codigoFallo + "\" encontrado en el índice " + posicion);
+        } else {
+            System.out.println("Búsqueda NO EXITOSA: \"" + codigoFallo + "\" no existe.");
+        }
     }
 }
