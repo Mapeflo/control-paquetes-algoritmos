@@ -63,6 +63,34 @@ public class ControlPaquetes {
             }
         }
     }
+    /**
+     * Búsqueda binaria por código de seguimiento.
+     * PRECONDICIÓN: el arreglo DEBE estar ordenado por código.
+     * Complejidad: O(log n)
+     */
+    public static int busquedaBinariaPorCodigo(Paquete[] paquetes, String codigo) {
+        if (paquetes == null || paquetes.length == 0) {
+            return -1;
+        }
+
+        int lo = 0;
+        int hi = paquetes.length - 1;
+
+        while (lo <= hi) {
+            int mid = lo + ((hi - lo) >>> 1); // evita overflow
+            int comparacion = paquetes[mid].getCodigoSeguimiento()
+                    .compareToIgnoreCase(codigo);
+
+            if (comparacion == 0) {
+                return mid; // Encontrado
+            } else if (comparacion < 0) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return -1; // No encontrado
+    }
     public static void main(String[] args) {
 
         Paquete[] paquetes = {
@@ -110,5 +138,29 @@ public class ControlPaquetes {
         System.out.println("\n>>> ORDENAMIENTO POR CÓDIGO DE SEGUIMIENTO");
         ordenarPorCodigo(paquetes);
         mostrarPaquetes(paquetes, "Arreglo ordenado por código");
+
+        // ========== BÚSQUEDA BINARIA ==========
+        System.out.println("\n>>> BÚSQUEDA BINARIA POR CÓDIGO");
+        System.out.println("PRECONDICIÓN: El arreglo ya está ordenado por código.");
+
+        // Caso exitoso
+        String codigoBinExito = "TRK1006";
+        int posBinaria = busquedaBinariaPorCodigo(paquetes, codigoBinExito);
+        if (posBinaria != -1) {
+            System.out.println("Búsqueda binaria EXITOSA: \"" + codigoBinExito +
+                    "\" encontrado en el índice " + posBinaria);
+            System.out.println("  → " + paquetes[posBinaria]);
+        } else {
+            System.out.println("Búsqueda binaria NO EXITOSA.");
+        }
+
+        // Caso no exitoso
+        String codigoBinFallo = "TRK1010";
+        posBinaria = busquedaBinariaPorCodigo(paquetes, codigoBinFallo);
+        if (posBinaria != -1) {
+            System.out.println("Búsqueda binaria EXITOSA: \"" + codigoBinFallo + "\" encontrado.");
+        } else {
+            System.out.println("Búsqueda binaria NO EXITOSA: \"" + codigoBinFallo + "\" no existe.");
+        }
     }
 }
